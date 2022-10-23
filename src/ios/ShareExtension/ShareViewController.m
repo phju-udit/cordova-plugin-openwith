@@ -190,8 +190,7 @@
             }];
 
             return;
-        }
-    } else if ([itemProvider hasItemConformingToTypeIdentifier:SHAREEXT_UNIFORM_TYPE_IDENTIFIER_PDF]) {
+        } else if ([itemProvider hasItemConformingToTypeIdentifier:SHAREEXT_UNIFORM_TYPE_IDENTIFIER_PDF]) {
             [self debug:[NSString stringWithFormat:@"item provider = %@", itemProvider]];
             
             [itemProvider loadItemForTypeIdentifier:SHAREEXT_UNIFORM_TYPE_IDENTIFIER_PDF options:nil completionHandler: ^(id<NSSecureCoding> item, NSError *error) {
