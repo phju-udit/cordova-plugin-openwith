@@ -186,7 +186,6 @@
                 [self openURL:[NSURL URLWithString:url]];
 
                 // Inform the host that we're done, so it un-blocks its UI.
-                sleep(1);
                 [self.extensionContext completeRequestReturningItems:@[] completionHandler:nil];
             }];
 
