@@ -218,6 +218,11 @@ static NSDictionary* launchOptions = nil;
         return;
     }
 
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSURL *dir = [fileManager containerURLForSecurityApplicationGroupIdentifier:SHAREEXT_GROUP_IDENTIFIER];
+    dir = [dir URLByAppendingPathComponent:@"bild.jpg"];
+    NSData *filedata = [fileManager contentsAtPath:dir.path];
+
     // Clean-up the object, assume it's been handled from now, prevent double processing
     [self.userDefaults removeObjectForKey:@"image"];
 
@@ -227,7 +232,7 @@ static NSDictionary* launchOptions = nil;
         return;
     }
     NSDictionary *dict = (NSDictionary*)object;
-    NSData *data = dict[@"data"];
+    NSData *data = filedata;
     NSString *name = dict[@"name"];
     self.backURL = dict[@"backURL"];
     NSString *type = [self mimeTypeFromUti:dict[@"uti"]];

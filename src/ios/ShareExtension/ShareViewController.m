@@ -159,13 +159,26 @@
                 else {
                     uti = SHAREEXT_UNIFORM_TYPE_IDENTIFIER;
                 }
+
+                NSFileManager *fileManager = [NSFileManager defaultManager];
+                NSURL *dir = [fileManager containerURLForSecurityApplicationGroupIdentifier:SHAREEXT_GROUP_IDENTIFIER];
+                if ([fileManager createDirectoryAtURL:dir withIntermediateDirectories:YES attributes:nil error:nil]) {
+                    [self debug:@"Directory erfolgreich"];
+                }
+                dir = [dir URLByAppendingPathComponent:@"bild.jpg"];
+                if ([fileManager createFileAtPath:dir.path contents:data attributes:nil] == YES) {
+                    [self debug:@"Speichern erfolgreich"];
+                };
+                
                 NSDictionary *dict = @{
                     @"backURL": self.backURL,
-                    @"data" : data,
+                    //@"data" : data,
                     @"uti": uti,
                     @"utis": utis,
-                    @"name": suggestedName
+                    @"name": suggestedName,
+                    @"path": dir.path
                 };
+
                 [self.userDefaults setObject:dict forKey:@"image"];
                 [self.userDefaults synchronize];
 
@@ -217,13 +230,26 @@
                 else {
                     uti = SHAREEXT_UNIFORM_TYPE_IDENTIFIER;
                 }
+                
+                NSFileManager *fileManager = [NSFileManager defaultManager];
+                NSURL *dir = [fileManager containerURLForSecurityApplicationGroupIdentifier:SHAREEXT_GROUP_IDENTIFIER];
+                if ([fileManager createDirectoryAtURL:dir withIntermediateDirectories:YES attributes:nil error:nil]) {
+                    [self debug:@"Directory erfolgreich"];
+                }
+                dir = [dir URLByAppendingPathComponent:@"bild.jpg"];
+                if ([fileManager createFileAtPath:dir.path contents:data attributes:nil] == YES) {
+                    [self debug:@"Speichern erfolgreich"];
+                };
+                
                 NSDictionary *dict = @{
                     @"backURL": self.backURL,
-                    @"data" : data,
+                    //@"data" : data,
                     @"uti": uti,
                     @"utis": utis,
-                    @"name": suggestedName
+                    @"name": suggestedName,
+                    @"path": dir.path
                 };
+
                 [self.userDefaults setObject:dict forKey:@"image"];
                 [self.userDefaults synchronize];
 
