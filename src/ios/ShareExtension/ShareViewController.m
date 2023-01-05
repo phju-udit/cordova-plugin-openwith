@@ -199,6 +199,7 @@
                 [self openURL:[NSURL URLWithString:url]];
 
                 // Inform the host that we're done, so it un-blocks its UI.
+                sleep(1);
                 [self.extensionContext completeRequestReturningItems:@[] completionHandler:nil];
             }];
 
@@ -230,7 +231,7 @@
                 else {
                     uti = SHAREEXT_UNIFORM_TYPE_IDENTIFIER;
                 }
-                
+
                 NSFileManager *fileManager = [NSFileManager defaultManager];
                 NSURL *dir = [fileManager containerURLForSecurityApplicationGroupIdentifier:SHAREEXT_GROUP_IDENTIFIER];
                 if ([fileManager createDirectoryAtURL:dir withIntermediateDirectories:YES attributes:nil error:nil]) {
@@ -275,6 +276,11 @@
             }];
 
             return;
+        } else {
+            // Unknown UTI
+            // Inform the host that we're done, so it un-blocks its UI.
+            sleep(1);
+            [self.extensionContext completeRequestReturningItems:@[] completionHandler:nil];
         }
     }
 
